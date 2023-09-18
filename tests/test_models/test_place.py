@@ -6,9 +6,9 @@ from models.place import Place
 import os
 env_value = os.environ.get('HBNB_TYPE_STORAGE')
 
-class test_Place(test_basemodel):
-    """ """
-    if env_value != 'db':
+if env_value != 'db':
+    class test_Place(test_basemodel):
+        """ """
         def __init__(self, *args, **kwargs):
             """ """
             super().__init__(*args, **kwargs)
@@ -18,7 +18,7 @@ class test_Place(test_basemodel):
         def test_city_id(self):
             """ """
             new = self.value()
-        self.assertEqual(type(new.city_id), str)
+            self.assertEqual(type(new.city_id), str)
     
         def test_user_id(self):
             """ """

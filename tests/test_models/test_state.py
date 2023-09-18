@@ -9,7 +9,7 @@ env_value = os.environ.get('HBNB_TYPE_STORAGE')
 class test_state(test_basemodel):
     """ """
     if env_value != 'db':
-        def __init__(self, *aenv_valuergs, **kwargs):
+        def __init__(self, *args, **kwargs):
             """ """
             super().__init__(*args, **kwargs)
             self.name = "State"
