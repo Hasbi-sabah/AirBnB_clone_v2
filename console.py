@@ -129,27 +129,12 @@ class HBNBCommand(cmd.Cmd):
             for param in new:
                 if re.search(r'^.*?=.*?$', param):
                     param = param.split("=")
-<<<<<<< HEAD
-                    try:
-                        if re.search(r'^"(.*?)"$', param[1]):
-                            param[1] = param[1].strip('"')
-                            param[1] = param[1].replace("_", " ")
-                            param[1] = param[1].replace("\\", "")
-                            setattr(new_instance, param[0], str(param[1]))
-                        elif re.search(r'^\d+\.\d+$', param[1]):
-                            setattr(new_instance, param[0], float(param[1]))
-                        elif re.search(r'^\d+$', param[1]):
-                            setattr(new_instance, param[0], int(param[1]))
-                    except Exception:
-                        continue
-=======
                     if re.search(r'^"(.*?)"$', param[1]):
                         param[1] = param[1].strip('"')
                         param[1] = param[1].replace("_", " ")
                         setattr(new_instance, param[0], str(param[1]))
                     else:
                         setattr(new_instance, param[0], eval(param[1]))
->>>>>>> 930163039aceddc877a0623312ad96881deb4d57
         new_instance.save()
         print(new_instance.id)
 
