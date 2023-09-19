@@ -198,21 +198,37 @@ if env_value == 'db':
             new_user.reviews.append(new_review)
 
             all_entries = [new_amenity, new_place, new_city, new_state, new_user]
+            new_storage = storage
+            new_storage.start_session()
             for i in all_entries:
-                storage.new(i)
-            storage.save()
+                new_storage.new(i)
+            new_storage.save()
+            new_storage.stop_session()
 
             count = 0
-            all_cls = storage.all().values()
+            new_storage.start_session()
+            all_cls = new_storage.all().values()
             for value in all_cls:
                 for cls in known_classes.values():
                     if isinstance(value, cls):
                         count += 1
             self.assertEqual(count, len(all_cls))
+            new_storage.stop_session()
             session.close()
 
         def test_delete(self):
             """ test case for DBStorage delete method """
+            new_storage = storage
+            new_storage.start_session()
+            all_cls = new_storage.all().values()
+            for i in all_cls:
+                new_storage.delete(i)
+            new_storage.save()
+            all_cls = new_storage.all().values()
+            self.assertEqual(len(all_cls), 0)
+            new_storage.stop_session()
 
         def test_reload(self):
             """ test case for reloading the DB storage """
+            new_storage = storage
+            self.assertIsNotNone(new_storage.Session)
