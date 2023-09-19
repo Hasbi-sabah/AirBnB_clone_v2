@@ -211,9 +211,6 @@ if env_value == 'db':
             self.assertEqual(count, len(all_cls))
             session.close()
 
-        def test_save(self):
-            """ test case for DBStorage save method """
-
         def test_delete(self):
             """ test case for DBStorage delete method """
 
