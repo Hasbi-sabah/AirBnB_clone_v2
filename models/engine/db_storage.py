@@ -16,6 +16,7 @@ class DBStorage:
     """An implementation of the Database Storage"""
     __engine = None
     __session = None
+    Session = None
 
     def __init__(self):
         """the class constructor for the database storage implementation"""
@@ -63,6 +64,20 @@ class DBStorage:
         if obj:
             self.__session.delete(obj)
 
+    def call(self, string):
+        """a public instance method used for executing
+            sql commands on the class's engine"""
+        self.__engine.execute(string)
+
+    def start_session(self):
+        """a public instance method used for starting a new session"""
+        self.__session = DBStorage.Session()
+
+    def stop_session(self):
+        """a public instance method used for ending a session"""
+        self.save()
+        self.__session.close()
+
     def reload(self):
         """a public instance method that initializes
             a thread-safe version of a session"""
@@ -74,5 +89,5 @@ class DBStorage:
         from models.review import Review
         Base.metadata.create_all(self.__engine)
 
-        Session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
-        self.__session = Session()
+        DBStorage.Session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
+        self.__session = DBStorage.Session()
