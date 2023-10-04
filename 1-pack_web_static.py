@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+""" Fabric script that generates a .tgz archive """
 from fabric.decorators import task
 from fabric.api import local
 
