@@ -11,14 +11,12 @@ env.hosts = ["100.27.4.102", "54.165.197.71"]
 @task
 def deploy():
     """ Fabric script that creates and distributes an archive """
-    file_name = execute(do_pack)
-    print('------------', file_name)
-    if not os.path.isfile('versions/' + file_name[env.host]):
+    file_name = do_pack()
+    if not os.path.isfile('versions/' + file_name):
         return False
-    return execute(do_deploy, 'versions/' + file_name[env.host])
+    return do_deploy('versions/' + file_name)
 
 
-@task
 def do_deploy(archive_path):
     """Fabric script that distributes an archive to web servers"""
     if not os.path.isfile(archive_path):
@@ -50,7 +48,7 @@ def do_deploy(archive_path):
     return True
 
 
-@task
+@runs_once
 def do_pack():
     """generates a .tgz archive from web_static"""
     file_name = "web_static_{}.tgz\
