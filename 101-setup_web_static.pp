@@ -24,7 +24,7 @@ exec { 'update':
   provider => shell,
 }
 -> exec { 'permission':
-  command => 'chown -R root:root /data/',
+  command => 'chown -R ubuntu:ubuntu /data/',
   provider => shell,
 }
 -> exec { 'add_lines':
