@@ -10,6 +10,7 @@ env.hosts = ["100.27.4.102", "54.165.197.71"]
 
 @task
 def deploy():
+    """ Fabric script that creates and distributes an archive """
     file_name = execute(do_pack)
     print('------------', file_name)
     if not os.path.isfile('versions/' + file_name[env.host]):
