@@ -8,7 +8,6 @@ import os
 env.hosts = ["100.27.4.102", "54.165.197.71"]
 
 
-
 @task
 def do_clean(number=0):
     """formats input and cleans remote"""
