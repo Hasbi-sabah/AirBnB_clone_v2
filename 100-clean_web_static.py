@@ -8,11 +8,6 @@ import os
 env.hosts = ["100.27.4.102", "54.165.197.71"]
 
 
-@runs_once
-def clean_local(n):
-    """cleans the local versions only once"""
-    local("ls -dt ./versions/* | head -n -{} | xargs rm -fr".format(n))
-
 
 @task
 def do_clean(number=0):
@@ -20,6 +15,6 @@ def do_clean(number=0):
     n = 1
     if int(number) != 0:
         n = int(number)
-    print(n)
+    local("ls -dt ./versions/* | head -n -{} | xargs rm -fr".format(n))
     run("ls -dt /data/web_static/releases/* | head -n \
 -{} | xargs rm -fr".format(n))
