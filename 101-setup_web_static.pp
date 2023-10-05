@@ -1,10 +1,10 @@
 # Puppet script sets up your web servers for the deployment of web_static.
 exec { 'update':
-  command = 'apt update',
+  command = 'apt-get update',
   provider => shell,
 }
 -> exec { 'install':
-  command = 'apt -y install nginx',
+  command = 'apt-get -y install nginx',
   provider => shell,
 }
 -> exec { 'create_test':
