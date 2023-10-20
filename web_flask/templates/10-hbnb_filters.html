@@ -3,11 +3,12 @@
 	<head>
 		<title>AirBnB clone</title>
 
-		<link rel="shortcut icon" href="images/icon.ico" >
-		<link rel="stylesheet" href="styles/4-common.css"/>
-		<link rel="stylesheet" href="styles/3-header.css"/>
-		<link rel="stylesheet" href="styles/3-footer.css"/>
-		<link rel="stylesheet" href="styles/6-filters.css"/>
+		<link rel="shortcut icon" href="../static/images/icon.ico" >
+		
+		<link rel="stylesheet" href="../static/styles/4-common.css"/>
+		<link rel="stylesheet" href="./static/styles/3-header.css"/>
+		<link rel="stylesheet" href="./static/styles/3-footer.css"/>
+		<link rel="stylesheet" href="./static/styles/6-filters.css"/>
 	</head>
     <body>
 		<header>
@@ -24,11 +25,9 @@
 						<li><h2>{{ state.name }}</h2>
 							<ul>
 							{% for key2, city in cities.items() %}
-								{% for key2, city in cities.items() %}
-									{% if state.id == city.state_id %}
-										<li><h4>{{ city.name }}</h4></li>
-									{% endif %}
-								{% endfor %}
+								{% if state.id == city.state_id %}
+									<li><h4>{{ city.name }}</h4></li>
+								{% endif %}
 							{% endfor %}
 							</ul>
 						</li>
@@ -39,7 +38,7 @@
 					<h3>Amenities</h3>
 					<h4>&nbsp;</h4>
 					<ul class="popover">
-					{% for key1, amenity in states.items() %}
+					{% for key3, amenity in amenities.items() %}
 						<li><h4>{{ amenity.name }}</h4></li>
 					{% endfor %}
 					</ul>
