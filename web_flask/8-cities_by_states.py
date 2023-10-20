@@ -16,7 +16,8 @@ def cities_by_states():
     states = dict(sorted(states.items(), key=lambda item: item[1].name))
     cities = storage.all(City)
     cities = dict(sorted(cities.items(), key=lambda item: item[1].name))
-    return render_template("8-cities_by_states.html", states=states, cities=cities)
+    file = "8-cities_by_states.html"
+    return render_template(file, states=states, cities=cities)
 
 
 @app.teardown_appcontext
