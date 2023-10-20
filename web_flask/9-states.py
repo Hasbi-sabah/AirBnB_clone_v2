@@ -4,20 +4,39 @@
 from flask import Flask, render_template
 from models import storage
 from models.state import State
+from models.city import City
 
 app = Flask(__name__, template_folder="templates")
+file = "9-states.html"
 
 
 @app.route("/states", strict_slashes=False)
-def states_9-states.pylist():
+def states():
     """ """
     states = storage.all(State)
     states = dict(sorted(states.items(), key=lambda item: item[1].name))
-    return render_template("7-states_list.html", states=states)
+    return render_template(file, not_found=False, data=states, id=None)
+
+
+@app.route("/states/<id>", strict_slashes=False)
+def states_id(id):
+    """ """
+    states = storage.all(State)
+    states = dict(sorted(states.items(), key=lambda item: item[1].name))
+    for key, state in states.items():
+        if state.id == id:
+            c = storage.all(City)
+            cities = {}
+            for key, city in c.items():
+                if state.id == city.state_id:
+                    cities[key] = city
+            return render_template(file, name=state.name,
+                                   not_found=False, data=cities, id=1)
+    return render_template(file, not_found=True, data=states)
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(error):
     storage.close()
 
 
