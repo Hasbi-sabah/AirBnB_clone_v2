@@ -22,16 +22,16 @@ def states():
 def states_id(id):
     """ """
     state = storage.search(State, id=id)
+    if state is None:
+        return render_template(file, not_found=True, data=states)
     c = storage.all(City)
     cities = {}
     for key, city in c.items():
         if state.id == city.state_id:
             cities[key] = city
-    cities = dict(sorted(cities.items(),
-                         key=lambda item: item[1].name))
-            return render_template(file, name=state.name,
-                                   not_found=False, data=cities, id=1)
-    return render_template(file, not_found=True, data=states)
+    cities = dict(sorted(cities.items(), key=lambda item: item[1].name))
+    return render_template(file, name=state.name, not_found=False,
+                           data=cities, id=1)
 
 
 @app.teardown_appcontext
