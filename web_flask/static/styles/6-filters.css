@@ -28,6 +28,8 @@
 }
 
 .popover {
+	position: relative;
+	z-index: 1000;
 	list-style-type: none;
 	display: none;
 	background-color: #FAFAFA;
