@@ -4,28 +4,29 @@
 from flask import Flask
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route("/", strict_slashes=False)
+@app.route("/")
 def hello():
     """/: displays Hello HBNB!"""
     return "Hello HBNB!"
 
 
-@app.route("/hbnb", strict_slashes=False)
+@app.route("/hbnb")
 def hbnb():
     """/hbnb: displays HBNB"""
     return "HBNB"
 
 
-@app.route("/c/<text>", strict_slashes=False)
+@app.route("/c/<text>")
 def C_text(text):
     """/c/<text>: display C followed by the value of the text variable"""
     text = text.replace("_", " ")
     return "C {}".format(text)
 
 
-@app.route("/python/", defaults={"text": "is cool"}, strict_slashes=False)
+@app.route("/python/", defaults={"text": "is cool"})
 @app.route("/python/<text>", strict_slashes=False)
 def python_text(text):
     """
