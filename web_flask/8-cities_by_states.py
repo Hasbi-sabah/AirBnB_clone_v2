@@ -4,20 +4,17 @@
 from flask import Flask, render_template
 from models import storage
 from models.state import State
-from models.city import City
 
-app = Flask(__name__, template_folder="templates")
+app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route("/cities_by_states", strict_slashes=False)
+@app.route("/cities_by_states")
 def cities_by_states():
     """ """
     states = storage.all(State)
     states = dict(sorted(states.items(), key=lambda item: item[1].name))
-    cities = storage.all(City)
-    cities = dict(sorted(cities.items(), key=lambda item: item[1].name))
-    file = "8-cities_by_states.html"
-    return render_template(file, states=states, cities=cities)
+    return render_template("8-cities_by_states.html", states=states)
 
 
 @app.teardown_appcontext
